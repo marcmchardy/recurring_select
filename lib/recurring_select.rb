@@ -80,9 +80,10 @@ module RecurringSelect
     params[:week_start] = params[:week_start].to_i if params[:week_start]
     begin
       if params[:until]
+        # Use IceCube's deserialize_time method to handle both Time and Hash representations of until
+        params[:until] = IceCube::TimeUtil.deserialize_time(params[:until])
         # Set to 23:59:59 (in current TZ) to encompass all events on until day
-        params[:until] = Time.strptime(params[:until], self.date_format)
-        params[:until] = params[:until].in_time_zone(Time.zone).change(hour: 23, min: 59, sec: 59)
+        params[:until] = params[:until].change(hour: 23, min: 59, sec: 59)
       end
     rescue ArgumentError
       # Invalid date given, attempt to assign :until will fail silently
