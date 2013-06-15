@@ -75,14 +75,13 @@ module RecurringSelect
 
   def self.deserialize_time(string_or_time_or_hash)
     if string_or_time_or_hash.is_a?(String)
-      Time.parse(string_or_time_or_hash, self.date_format)
+      Date.parse(string_or_time_or_hash, self.date_format)
     elsif string_or_time_or_hash.is_a?(Time)
       string_or_time_or_hash
     elsif string_or_time_or_hash.is_a?(Hash)
       string_or_time_or_hash[:time] = Time.parse(string_or_time_or_hash[:time], self.date_format) if string_or_time_or_hash[:time].is_a?(String)
       string_or_time_or_hash[:time].in_time_zone(string_or_time_or_hash[:zone])
     end
-
   end
 
   def self.filter_params(params)
