@@ -73,6 +73,18 @@ module RecurringSelect
 
   private
 
+  def self.deserialize_time(string_or_time_or_hash)
+    if string_or_time_or_hash.is_a?(String)
+      Time.parse(string_or_time_or_hash, self.date_format)
+    elsif string_or_time_or_hash.is_a?(Time)
+      string_or_time_or_hash
+    elsif string_or_time_or_hash.is_a?(Hash)
+      string_or_time_or_hash[:time] = Time.parse(string_or_time_or_hash[:time], self.date_format) if string_or_time_or_hash[:time].is_a?(String)
+      string_or_time_or_hash[:time].in_time_zone(string_or_time_or_hash[:zone])
+    end
+
+  end
+
   def self.filter_params(params)
     params.reject!{|key, value| value.blank? || value=="null" }
 
@@ -81,7 +93,7 @@ module RecurringSelect
     begin
       if params[:until]
         # Use IceCube's deserialize_time method to handle both Time and Hash representations of until
-        params[:until] = IceCube::TimeUtil.deserialize_time(params[:until])
+        params[:until] = self.deserialize_time(params[:until])
         # Set to 23:59:59 (in current TZ) to encompass all events on until day
         params[:until] = params[:until].change(hour: 23, min: 59, sec: 59)
       end
