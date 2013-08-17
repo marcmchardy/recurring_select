@@ -101,7 +101,7 @@ module RecurringSelect
     end
 
     params[:validations] ||= {}
-    params[:validations].symbolize_keys!
+    params[:validations].symbolize_keys! if params[:validations].respond_to?(:symbolize_keys!)
 
     if params[:validations][:day]
       params[:validations][:day] = params[:validations][:day].collect(&:to_i)
