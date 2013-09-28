@@ -344,7 +344,7 @@ window.RecurringSelectDialog =
       year = today.getFullYear()
       month = today.getMonth()
       day = today.getDate()
-      switch @current_rule.hash.rule_type
+      switch @current_rule.hash?.rule_type
         when "IceCube::MonthlyRule" then new Date year + 1, month, day
         when "IceCube::YearlyRule" then new Date year + 5, month, day
         when "IceCube::WeeklyRule" then new Date year, month + 1, day
