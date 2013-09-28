@@ -192,7 +192,7 @@ window.RecurringSelectDialog =
         onSelect: (date) =>
           @setUntil date
       $datepicker.datepicker('setDate', untilDate)
-      @setUntil(untilDate)
+      @setUntil(moment(untilDate).toDate())
 
     init_calendar_days: (section) =>
       monthly_calendar = section.find(".rs_calendar_day")
