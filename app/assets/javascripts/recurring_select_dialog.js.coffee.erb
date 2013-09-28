@@ -187,11 +187,11 @@ window.RecurringSelectDialog =
 
     untilInit: =>
       untilDate = @current_rule.hash?.until || @getUntilDefaultDate()
-      @content.find('#until').datepicker
+      $datepicker = @content.find('#until').datepicker
         dateFormat: '<%= RecurringSelect.datepicker_format %>'
         onSelect: (date) =>
           @setUntil date
-      .val untilDate
+      $datepicker.datepicker('setDate', untilDate)
       @content.find('#indefinite').click() if @current_rule.hash?.until?
 
     init_calendar_days: (section) =>
