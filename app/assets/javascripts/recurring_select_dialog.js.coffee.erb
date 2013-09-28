@@ -186,13 +186,13 @@ window.RecurringSelectDialog =
       @content.css {"width": "auto"}
 
     untilInit: =>
-      untilDate = @current_rule.hash?.until || @getUntilDefaultDate()
+      untilDate = moment(@current_rule.hash?.until).toDate() || @getUntilDefaultDate()
       $datepicker = @content.find('#until').datepicker
         dateFormat: '<%= RecurringSelect.datepicker_format %>'
         onSelect: (date) =>
           @setUntil date
       $datepicker.datepicker('setDate', untilDate)
-      @setUntil(moment(untilDate).toDate())
+      @setUntil(untilDate)
 
     init_calendar_days: (section) =>
       monthly_calendar = section.find(".rs_calendar_day")
