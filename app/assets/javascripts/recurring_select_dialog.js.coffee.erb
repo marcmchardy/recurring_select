@@ -192,7 +192,7 @@ window.RecurringSelectDialog =
         onSelect: (date) =>
           @setUntil date
       $datepicker.datepicker('setDate', untilDate)
-      @content.find('#indefinite').click() if @current_rule.hash?.until?
+      @setUntil(untilDate)
 
     init_calendar_days: (section) =>
       monthly_calendar = section.find(".rs_calendar_day")
