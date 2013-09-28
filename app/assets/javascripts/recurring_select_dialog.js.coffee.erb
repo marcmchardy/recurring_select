@@ -186,7 +186,8 @@ window.RecurringSelectDialog =
       @content.css {"width": "auto"}
 
     untilInit: =>
-      untilDate = moment(@current_rule.hash?.until).toDate() || @getUntilDefaultDate()
+      untilDate = moment(@current_rule.hash?.until).toDate() if @current_rule.hash?.until
+      untilDate ||= @getUntilDefaultDate()
       $datepicker = @content.find('#until').datepicker
         dateFormat: '<%= RecurringSelect.datepicker_format %>'
         onSelect: (date) =>
