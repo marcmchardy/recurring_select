@@ -93,6 +93,7 @@ module RecurringSelect
       if params[:until]
         # Use IceCube's deserialize_time method to handle both Time and Hash representations of until
         params[:until] = self.deserialize_time(params[:until])
+        params[:until] = params[:until].to_time
         # Set to 23:59:59 (in current TZ) to encompass all events on until day
         params[:until] = params[:until].change(hour: 23, min: 59, sec: 59)
       end
