@@ -1,13 +1,9 @@
-require 'rubygems'
-require 'spork'
+require "rspec"
 
-Spork.prefork do
-  ENV["RAILS_ENV"] = "test"
-  require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+ENV["RAILS_ENV"] = "test"
+require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 
-  Rails.backtrace_cleaner.remove_silencers!
+Rails.backtrace_cleaner.remove_silencers!
 
-  # Load support files
-  Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
-end
-
+# Load support files
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }

@@ -1,14 +1,6 @@
 require "recurring_select/engine"
 require "ice_cube"
 
-#TODO: remove monkey patch when https://github.com/seejohnrun/ice_cube/issues/136 is fixed
-IceCube::ValidatedRule.class_eval do
-  alias old_to_s to_s
-  def to_s
-    old_to_s.gsub("when it is", "and")
-  end
-end
-
 module RecurringSelect
   class << self
     attr_writer :date_format
@@ -45,7 +37,7 @@ module RecurringSelect
         params = JSON.parse(params)
       end
 
-      params.symbolize_keys! if params.respond_to?(:symbolize_keys!)
+      params = params.symbolize_keys
       rules_hash = filter_params(params)
 
       IceCube::Rule.from_hash(rules_hash)

@@ -49,10 +49,10 @@ methods =
 
 
   insert_option: (new_rule_str, new_rule_json) ->
-    seperator = @find("option:disabled")
-    if seperator.length == 0
-      seperator = @find("option")
-    seperator = seperator.last()
+    separator = @find("option:disabled")
+    if separator.length == 0
+      separator = @find("option")
+    separator = separator.last()
 
     new_option = $(document.createElement("option"))
     new_option.attr "data-custom", true
@@ -62,7 +62,7 @@ methods =
 
     new_option.text new_rule_str
     new_option.val new_rule_json
-    new_option.insertBefore seperator
+    new_option.insertBefore separator
 
   methods: ->
     methods
@@ -72,3 +72,26 @@ $.fn.recurring_select = (method) ->
     return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ) );
   else
     $.error( "Method #{method} does not exist on jQuery.recurring_select" );
+
+$.fn.recurring_select.texts = {
+  repeat: "Repeat"
+  last_day: "Last Day"
+  frequency: "Frequency"
+  daily: "Daily"
+  weekly: "Weekly"
+  monthly: "Monthly"
+  yearly: "Yearly"
+  every: "Every"
+  days: "day(s)"
+  weeks_on: "week(s) on"
+  months: "month(s)"
+  years: "year(s)"
+  day_of_month: "Day of month"
+  day_of_week: "Day of week"
+  cancel: "Cancel"
+  ok: "OK"
+  summary: "Summary"
+  first_day_of_week: 0
+  days_first_letter: ["S", "M", "T", "W", "T", "F", "S" ]
+  order: ["1st", "2nd", "3rd", "4th"]
+}
