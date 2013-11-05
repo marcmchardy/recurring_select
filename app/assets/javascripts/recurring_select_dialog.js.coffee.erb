@@ -226,7 +226,7 @@ window.RecurringSelectDialog =
       @content.find(".rs_calendar_week").toggle(week_mode)
       @content.find(".rs_calendar_day").toggle(!week_mode)
 
-# ========================= Change callbacks ===============================
+    # ========================= Change callbacks ===============================
 
     freqChanged: =>
       old_until = @current_rule.hash?.until
@@ -344,7 +344,7 @@ window.RecurringSelectDialog =
         else new Date year, month, day + 7
 
 
- ========================= Change callbacks ===============================
+    # ========================= Change callbacks ===============================
 
     template: () ->
       str = "
